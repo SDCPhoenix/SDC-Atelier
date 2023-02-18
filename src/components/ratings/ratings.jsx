@@ -40,9 +40,9 @@ useEffect(() => {
     .then(response => {
     // console.log('successful get from ratings.jsx, son', response.data);
       //for later, find a way to get rid of the duplicate reviews
-    setTotalReviews(response.data.results);
+    setTotalReviews(response.data);
     // initialReviewList = totalReviews.slice(0, 2);
-    setRenderedReviews(response.data.results.slice(0, 2));
+    setRenderedReviews(response.data.slice(0, 2));
   })
   .catch(err => {
     // console.log('unsucc get from ratings.jsx son', err);
@@ -102,9 +102,10 @@ useEffect(() => {
         productID: productID
       }
     }).then(results => {
+      console.log('this is results',results.data);
       // console.log('successful sort get, son', results);
-      setTotalReviews(results.data.results);
-      var initialSlice = results.data.results.slice(0, 2);
+      setTotalReviews(results.data);
+      var initialSlice = results.data.slice(0, 2);
       setRenderedReviews(initialSlice);
 
     }).catch(err => {

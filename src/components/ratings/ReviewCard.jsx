@@ -3,8 +3,8 @@ import axios from 'axios';
 
 
 const ReviewCard = ({review}) => {
-
-  const reviewID = review.review_id;
+  console.log('this is prop', review)
+  const reviewID = review.id;
 
   var date = review.date.split('T')[0];
   var splitDate = date.split('-');
@@ -38,10 +38,10 @@ const ReviewCard = ({review}) => {
    recText = <div><img src="https://img.icons8.com/material-outlined/24/null/checkmark--v1.png"/>I recommend this product</div>
   }
 
-  var reviewPhotos = review.photos.map(photo => {
-    return <img src={photo.url} height="34" onClick={() => {
-      imgModal(photo.url)}}/>
-  })
+  // var reviewPhotos = review.photos.map(photo => {
+  //   return <img src={photo.url} height="34" onClick={() => {
+  //     imgModal(photo.url)}}/>
+  // })
 
   const [modalImg, setModalImg] = useState('');
   //remember to add to return
@@ -67,7 +67,8 @@ const ReviewCard = ({review}) => {
     if (alreadyClicked) {
       alert('You can only vote once per review')
     } else {
-      axios.put('/helpfulR', {
+      console.log('THIS IS REVIEW ID', reviewID)
+      axios.post('/helpfulR', {
         review_id: reviewID
        }
       ).then(results => {
@@ -109,7 +110,7 @@ return (
     <div className='reviewBody'>{review.body}</div>
     <div className='balls'>{recText}</div>
     <div className='balls'>{review.response}</div>
-    <div className='balls'>{reviewPhotos}</div>
+    {/* <div className='balls'>{reviewPhotos}</div> */}
     <div className='reviewaModal'>{modalImg}</div>
     <div className='helpfulDiv' >Was this review helpful? <u onClick={() => {addHelpfulness(reviewID)}}>Yes,</u> <u>No</u> ({reviewHelpfulness}) <u onClick={() => {reportReview(reviewID)}}>Report</u></div>
 
