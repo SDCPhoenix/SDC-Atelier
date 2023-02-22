@@ -17,14 +17,13 @@ app.use(express.static(path.join(__dirname, '../public')));
 
 
 app.get('/reviews', (req, res) => {
-
+  console.log('in reviews')
   db.query(`SELECT * FROM reviews_etl WHERE product_id = ${req.query.productID}`).then((data) => {
     res.send(data.rows)
   })
 });
 
 app.get('/loaderio-8c1f0b1bf6148fc8a56974ede51e99a2/', (req, res) => {
-  console.log('Loader')
     res.send('loaderio-8c1f0b1bf6148fc8a56974ede51e99a2')
 });
 
