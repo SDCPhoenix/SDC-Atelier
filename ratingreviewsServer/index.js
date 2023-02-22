@@ -23,9 +23,9 @@ app.get('/reviews', (req, res) => {
   })
 });
 
-app.get('/loaderio-aee33c3fb468da799bd9a8dbe1d371bb/', (req, res) => {
-
-    res.send('loaderio-aee33c3fb468da799bd9a8dbe1d371bb')
+app.get('/loaderio-8c1f0b1bf6148fc8a56974ede51e99a2/', (req, res) => {
+  console.log('Loader')
+    res.send('loaderio-8c1f0b1bf6148fc8a56974ede51e99a2')
 });
 
 
