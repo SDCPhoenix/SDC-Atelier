@@ -6,6 +6,7 @@ const axios = require('axios');
 const compression = require('compression');
 const app = express();
 let db = require('./connectionRatingReview.js').db;
+const fs = require('fs');
 
 app.use(cors());
 app.use(express.json());
@@ -16,9 +17,15 @@ app.use(express.static(path.join(__dirname, '../public')));
 
 
 app.get('/reviews', (req, res) => {
+
   db.query(`SELECT * FROM reviews_etl WHERE product_id = ${req.query.productID}`).then((data) => {
     res.send(data.rows)
   })
+});
+
+app.get('/loaderio-aee33c3fb468da799bd9a8dbe1d371bb/', (req, res) => {
+
+    res.send('loaderio-aee33c3fb468da799bd9a8dbe1d371bb')
 });
 
 
@@ -61,7 +68,8 @@ app.post('/postReview', (req, res) => {
   req.body.rating = Number(req.body.rating);
   var date = new Date();
   req.body.date = date.getTime();
-  db.query(`INSERT INTO reviews_etl (product_id, rating, date, summary, body, recommend,reviewer_name, reviewer_email) VALUES (${req.body.product_id}, ${req.body.rating}, ${req.body.date}, '${req.body.summary}', '${req.body.body}', ${req.body.recommend}, '${req.body.name}', '${req.body.email}' )`).then(() => {
+  console.log(req.body)
+  db.query(`INSERT INTO reviews_etl ( product_id, rating, date, summary, body, recommend,reviewer_name, reviewer_email) VALUES ( ${req.body.product_id}, ${req.body.rating}, ${req.body.date}, '${req.body.summary}', '${req.body.body}', ${req.body.recommend}, '${req.body.name}', '${req.body.email}' )`).then(() => {
     res.send(202);
   })
 });
@@ -81,6 +89,8 @@ app.get('/metadata', (req, res) => {
 
   })
 });
+
+// app.listen(process.env.PORT);
 
 app.listen(process.env.PORT);
 
