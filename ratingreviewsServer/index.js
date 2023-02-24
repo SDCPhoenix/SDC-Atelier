@@ -18,6 +18,7 @@ app.use(express.static(path.join(__dirname, '../public')));
 
 app.get('/reviews', (req, res) => {
   console.log('in reviews')
+  req.query.productID = Number(req.query.productID);
   db.query(`SELECT * FROM reviews_etl WHERE product_id = ${req.query.productID}`).then((data) => {
     res.send(data.rows)
   })
@@ -29,6 +30,7 @@ app.get('/loaderio-8c1f0b1bf6148fc8a56974ede51e99a2/', (req, res) => {
 
 
 app.get('/sortedReviews', (req, res) => {
+  req.query.productID = Number(req.query.productID);
 
   var query =  req.query.option.toLowerCase();
   if(query  === 'helpful') {
@@ -49,13 +51,15 @@ app.get('/sortedReviews', (req, res) => {
   }
 });
 
-app.post('/helpfulR', (req, res) => {
+app.post('/helpfulR', (req, res) => {r
+  req.body.review_id = Number(req.body.review_id);
   db.query(`UPDATE reviews_etl SET helpfulness = helpfulness + 1  WHERE  id = ${req.body.review_id}`).then((data) => {
   res.send(202);
 })
  });
 
  app.put('/reportR', (req, res) => {
+  req.body.review_id = Number(req.body.review_id)
   db.query(`UPDATE reviews_etl SET reported = true WHERE id = ${req.body.review_id}`).then(() => {
     res.send(202)
   })
@@ -75,7 +79,7 @@ app.post('/postReview', (req, res) => {
 
 app.get('/metadata', (req, res) => {
   console.log('in meta data');
-  var id = req.query.productID;
+  var id = Number(req.query.productID);
   var metadata = {ratings:
 {}};
   // console.log(`SELECT * FROM characteristics_etl INNER JOIN character_reviews_etl ON characteristics_etl.id = character_reviews_etl.characteristics_id WHERE product_id = ${id};`);

@@ -3,8 +3,7 @@ require('dotenv').config();
 const { parse } = require("csv-parse");
 const Papa = require('papaparse');
 const pgp = require('pg-promise')({});
-const {ParameterizedQuery: PQ} = require('pg-promise');
-// const db = pgp("postgres://localhost:5432/rating_reviews");
+
 let db = require('./connectionRatingReview.js').db;
 const format = require('pg-format');
 // const detectNewlineAtEof = require('detect-newline-at-eof')
