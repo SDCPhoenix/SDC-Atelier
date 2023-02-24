@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 
   const ShowMoreButton = ({totalReviews, renderedReviews, updateReviewArray}) => {
-    var diff = totalReviews.length - renderedReviews.length;
+    // var diff = totalReviews.length - renderedReviews.length;
 
     // console.log('hello from showmore', totalReviews, renderedReviews, updateReviewArray, 'diff', diff)
     const [showButton, setShowButton] = useState(true);

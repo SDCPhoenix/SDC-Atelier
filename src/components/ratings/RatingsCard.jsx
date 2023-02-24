@@ -26,31 +26,31 @@ function RatingsCard({onClickProgressBars, productID}) {
 
 
   useEffect(() => {
-    // console.log('product id useffect', productID, typeof productID)
+    console.log('product id useffect', productID, typeof productID)
     axios.get('/metadata', { params: {
       productID: productID
     }})
-    .then(response => {
-      // console.log('successful metadata get', response.data);
-      metaData.ratings = response.data.ratings;
-      setMetadataRatings(response.data.ratings);
-      metaData.recommended = response.data.recommended;
-      setMetadataRecommended(response.data.recommended);
-        var ratingsSum = 0;
-        var ratingsCount = 0;
-        for (var key in metaData.ratings) {
-          ratingsSum += metaData.ratings[key] * (key)
-          ratingsCount += metaData.ratings[key] * 1;
-        }
-          //calc rating avg and review count & average
-        var avg = (ratingsSum / ratingsCount).toFixed(1);
-        setRatingAvg(avg);
-        //calc rev recommend %
-        var recTotal = (metaData.recommended.false * 1 + metaData.recommended.true * 1)
-        let recAverage = ((metaData.recommended.true / recTotal) * 100).toFixed();
-        setRecAvg(recAverage);
-        // console.log('metadata ratings', metaData.ratings, recAverage);
-        setMetadataChars(response.data.characteristics);
+    .then((response) => {
+      console.log('successful metadata get', response);
+      // metaData.ratings = response.data.ratings;
+      // setMetadataRatings(response.data.ratings);
+      // metaData.recommended = response.data.recommended;
+      // setMetadataRecommended(response.data.recommended);
+      //   var ratingsSum = 0;
+      //   var ratingsCount = 0;
+      //   for (var key in metaData.ratings) {
+      //     ratingsSum += metaData.ratings[key] * (key)
+      //     ratingsCount += metaData.ratings[key] * 1;
+      //   }
+      //     //calc rating avg and review count & average
+      //   var avg = (ratingsSum / ratingsCount).toFixed(1);
+      //   setRatingAvg(avg);
+      //   //calc rev recommend %
+      //   var recTotal = (metaData.recommended.false * 1 + metaData.recommended.true * 1)
+      //   let recAverage = ((metaData.recommended.true / recTotal) * 100).toFixed();
+      //   setRecAvg(recAverage);
+      //   // console.log('metadata ratings', metaData.ratings, recAverage);
+      //   setMetadataChars(response.data.characteristics);
 
     }).catch(err => {
       console.log('err getting metadata son', err);

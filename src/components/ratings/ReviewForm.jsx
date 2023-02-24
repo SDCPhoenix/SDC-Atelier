@@ -110,9 +110,6 @@ function ReviewForm({toggleAddReviewForm, showAddReviewForm, setShowAddReviewFor
         }).catch(err => {
           console.log('err posting son',  err);
         });
-
-
-        alert('review submitted!');
     }
 
 
